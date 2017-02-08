@@ -72,9 +72,9 @@ void LCD_vidInit(void)
 
   //Function Set
   //(DL => 1)  8-bit bus mode
-  //(N  => 0)  1 line display mode
+  //(N  => 1)  2 line display mode
   //(F  => 0)  5x8 dots format
-  LCD_vidSendCommand(0b00110000);
+  LCD_vidSendCommand(0b00111000);
 }
 /***********************************************************************************************************/
 //Writing a Sentence on LCD
