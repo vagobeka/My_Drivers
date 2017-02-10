@@ -26,6 +26,13 @@
 #define  LCD_RW_PIN         1      // R/W   ->     PIN  B1
 #define  LCD_EN_PIN         2      // E     ->     PIN  B2
 
+//When setting the directions of LCD ports in main just copy and paste these lines
+
+//	Dio_vidSetPortDirection(LCD_DATA_Port, PORT_OUTPUT);
+//	Dio_vidSetPinDirection(LCD_Control_Port, LCD_RS_PIN, OUTPUT);
+//	Dio_vidSetPinDirection(LCD_Control_Port, LCD_EN_PIN, OUTPUT);
+//	Dio_vidSetPinDirection(LCD_Control_Port, LCD_RW_PIN, OUTPUT);
+//	LCD_vidInit();
 
 void LCD_vidSendCommand(u8 command);
 void LCD_vidWriteCharachter(u8 character);
