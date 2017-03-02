@@ -1,7 +1,7 @@
 /*
- * Dio.h
+ * Dio Driver for AVR Atmega128
  *
- *  Created on: Jan 28, 2017
+ *  Created on: Feb 8, 2017
  *      Author: Vagobeka
  */
 

@@ -10,9 +10,11 @@
 #include "Dio.h"
 #include "LCD.h"
 #include <util/delay.h>
-
-/***********************************************************************************************************/
-//Sending commands to LCD
+/*
+===========================================================================================================
+                                ##### Sending commands to LCD #####
+===========================================================================================================
+*/
 void LCD_vidSendCommand(u8 command)
 {
 	Dio_vidSetPinValue(LCD_Control_Port,LCD_RS_PIN,0);  // RS is 0 to write a command
@@ -28,8 +30,11 @@ void LCD_vidSendCommand(u8 command)
 	Dio_vidSetPinValue(LCD_Control_Port,LCD_EN_PIN,1);
 	_delay_ms(10);
 }
-/***********************************************************************************************************/
-//Writing a character on LCD
+/*
+===========================================================================================================
+                                ##### Writing a character on LCD #####
+===========================================================================================================
+*/
 void LCD_vidWriteCharachter(u8 character)
 {
 	Dio_vidSetPinValue(LCD_Control_Port,LCD_RS_PIN,1);  // RS is 1 to write a Data
@@ -45,8 +50,11 @@ void LCD_vidWriteCharachter(u8 character)
 	Dio_vidSetPinValue(LCD_Control_Port,LCD_EN_PIN,1);
 	_delay_ms(10);
 }
-/***********************************************************************************************************/
-//Initialization of LCD
+/*
+===========================================================================================================
+                                ##### Initialization of LCD #####
+===========================================================================================================
+*/
 void LCD_vidInit(void)
 {
 
@@ -76,8 +84,11 @@ void LCD_vidInit(void)
   //(F  => 0)  5x8 dots format
   LCD_vidSendCommand(0b00111000);
 }
-/***********************************************************************************************************/
-//Writing a Sentence on LCD
+/*
+===========================================================================================================
+                                ##### Writing a Sentence on LCD #####
+===========================================================================================================
+*/
 void LCD_vidWriteSentence(u8* string)
 {
  u8 index=0;
@@ -87,10 +98,14 @@ void LCD_vidWriteSentence(u8* string)
      index ++;
  }
 }
-/***********************************************************************************************************/
-//This function is used when using KeyPad 4X4 with LCD 2x16
-//It used to print the pressed Key as a word on LCD
-//The entered key must be with in range (1->16)
+/*
+===========================================================================================================
+                                ##### Printing the pressed Key on LCD as a word #####
+===========================================================================================================
+* This function is used when using KeyPad 4X4 with LCD 2x16
+* It used to print the pressed Key as a word on LCD
+* The entered key must be with in range (1->16)
+*/
 void  LCD_KPD_vidPrintPressedKey(u8 key) {
 
   u8 K1[]="K1",K2[]="K2",K3[]="K3",K4[]="K4",K5[]="K5",K6[]="K6";
@@ -176,3 +191,34 @@ void  LCD_KPD_vidPrintPressedKey(u8 key) {
 	}
 }
 
+/*
+===========================================================================================================
+                                      ##### Printing numbers on LCD #####
+===========================================================================================================
+This function is used to print numbers on the LCD
+The Entered number must be in range of (0 -> 4294967295)
+*/
+void LCD_vidPrintNumbers(u32 number)
+{
+	u8 result[10];
+	u8 digit=0;
+	u8 count=0;
+do{
+	//Getting the first number of the entered numbers (from the right)
+	//and save it in the first element of the array
+	result[digit]=number%10;
+	//reducing the number
+	number=number/10;
+	digit++;
+}while(number!=0);  // Repeat until the last number
+
+//After ending the loop the value of i has the number of digits of the entered number
+
+ for(count=0,digit--;count<=digit;count++)
+ {
+	 //Printing the result array from last element to the first.
+	 //As the last number entered the first element
+	LCD_vidWriteCharachter('0'+result[digit-count]);
+ }
+
+}

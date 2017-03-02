@@ -17,11 +17,11 @@
 
 //Setting up the Data Port
 //(DB0 -> Port_Pin0)...(DB7 -> Port_Pin7)
-#define  LCD_DATA_Port      A      //Data Port is A
+#define  LCD_DATA_Port      C      //Data Port is A
 
 
 //Setting up the Control Port
-#define  LCD_Control_Port   B      //Control Port is B
+#define  LCD_Control_Port   D      //Control Port is B
 #define  LCD_RS_PIN         0      // RS    ->     PIN  B0
 #define  LCD_RW_PIN         1      // R/W   ->     PIN  B1
 #define  LCD_EN_PIN         2      // E     ->     PIN  B2
@@ -39,5 +39,6 @@ void LCD_vidWriteCharachter(u8 character);
 void LCD_vidInit(void);
 void LCD_vidWriteSentence(u8* string);
 void LCD_KPD_vidPrintPressedKey(u8 key);
+void LCD_vidPrintNumbers(u32 number);
 
 #endif /* LCD_H_ */
