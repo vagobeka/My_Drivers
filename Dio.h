@@ -13,9 +13,9 @@
 #define B 1
 #define C 2
 #define D 3
-#define INPUT 0
+#define INPUT  0
 #define OUTPUT 1
-#define PORT_INPUT 0x00          //All port is Input
+#define PORT_INPUT  0x00          //All port is Input
 #define PORT_OUTPUT 0xFF         //All port is Output
 
 //Setting The Direction of any Pin or Port
