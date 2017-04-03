@@ -1,5 +1,7 @@
 /*
- * LCD 2x16
+ * LCD 2x16 with ATmega32
+ *
+ * 8-bit Mode
  *
  *  Created on: Feb 4, 2017
  *      Author: Vagobeka
@@ -11,28 +13,18 @@
 #include "Types.h"
 #include "Macros.h"
 #include "Dio.h"
-//#include "Keypad.h"
-//Connections with ATmega32
-//8-bit Mode
+#include <util/delay.h>
 
 //Setting up the Data Port
-//(DB0 -> Port_Pin0)...(DB7 -> Port_Pin7)
-#define  LCD_DATA_Port      C      //Data Port is A
+//(D0 -> Port_Pin0)...(D7 -> Port_Pin7)
+#define  LCD_DATA_Port      C
 
 
 //Setting up the Control Port
-#define  LCD_Control_Port   D      //Control Port is B
-#define  LCD_RS_PIN         0      // RS    ->     PIN  B0
-#define  LCD_RW_PIN         1      // R/W   ->     PIN  B1
-#define  LCD_EN_PIN         2      // E     ->     PIN  B2
-
-//When setting the directions of LCD ports in main just copy and paste these lines
-
-//	Dio_vidSetPortDirection(LCD_DATA_Port, PORT_OUTPUT);
-//	Dio_vidSetPinDirection(LCD_Control_Port, LCD_RS_PIN, OUTPUT);
-//	Dio_vidSetPinDirection(LCD_Control_Port, LCD_EN_PIN, OUTPUT);
-//	Dio_vidSetPinDirection(LCD_Control_Port, LCD_RW_PIN, OUTPUT);
-//	LCD_vidInit();
+#define  LCD_Control_Port   D      //Control Port
+#define  LCD_RS_PIN         5      // RS    ->   The number of the desired pin
+#define  LCD_RW_PIN         6      // R/W   ->   The number of the desired pin
+#define  LCD_EN_PIN         7      // E     ->   The number of the desired pin
 
 void LCD_vidSendCommand(u8 command);
 void LCD_vidWriteCharachter(u8 character);

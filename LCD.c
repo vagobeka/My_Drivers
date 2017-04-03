@@ -1,15 +1,13 @@
 /*
- * LCD 2x16
+ * LCD 2x16 with ATmega32
+ *
+ * 8-bit Mode
  *
  *  Created on: Feb 4, 2017
  *      Author: Vagobeka
  */
 
-#include "Types.h"
-#include "Macros.h"
-#include "Dio.h"
 #include "LCD.h"
-#include <util/delay.h>
 /*
 ===========================================================================================================
                                 ##### Sending commands to LCD #####
@@ -57,6 +55,12 @@ void LCD_vidWriteCharachter(u8 character)
 */
 void LCD_vidInit(void)
 {
+	/*Setting the directions of LCD ports */
+
+	Dio_vidSetPortDirection(LCD_DATA_Port, PORT_OUTPUT);
+	Dio_vidSetPinDirection(LCD_Control_Port, LCD_RS_PIN, OUTPUT);
+	Dio_vidSetPinDirection(LCD_Control_Port, LCD_RW_PIN, OUTPUT);
+	Dio_vidSetPinDirection(LCD_Control_Port, LCD_EN_PIN, OUTPUT);
 
   _delay_ms(100);
   //All these values form data sheet of LCD
